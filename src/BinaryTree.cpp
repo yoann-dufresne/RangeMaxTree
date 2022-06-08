@@ -45,20 +45,24 @@ BinaryTree* BinaryTree::buildFromLeaves(NODE *sortedLeaves, int start, int end) 
 
 
 int BinaryTree::update(const int k, const int val) {
-    if (k >= this->node.key) {
-        return this->right->update(k, val);
-    }
-    if (k < this->node.key) {
-        return this->left->update(k , val);
-    }
-    else {
-        if (this->left != nullptr || this->right != nullptr) {
-            return -1; // We are trying to change a non-leaf node
-        } else {
-            this->node.value = val;
-            return 0; // Success
+    if (left == nullptr) { // At a leaf
+        if (k == node.key) {
+            node.value = val;
+            return 1;
         }
+        return 0;
     }
+    // At a node
+    int found;
+    if (left->node.key < k) { // Going right
+        found = right->update(k, val);
+    } else { // Going left
+        found = left->update(k, val);
+    }
+    if (found) {
+        node.value = (left->node.value < right->node.value)? left->node.value : right->node.value;
+    }
+    return found;
 }
 
 void BinaryTree::print(int indent) {

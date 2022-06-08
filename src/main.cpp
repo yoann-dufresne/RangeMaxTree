@@ -13,7 +13,8 @@ int main() {
     NODE array[] = {node1, node2, node3, node4};
 
     BinaryTree* t = BinaryTree::buildFromLeaves(array, 0, 4);
-    //t.print();
+    t->print();
+    t->update(4, 2);
     t->print();
 
     return 0;
