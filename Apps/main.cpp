@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "headers/BinaryTree.hpp"
+#include "../src/headers/BinaryTree.hpp"
 
 using namespace std;
 

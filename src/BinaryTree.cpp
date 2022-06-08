@@ -91,10 +91,13 @@ void BinaryTree::print(int indent) {
  * @return the max value in the specified range
  */
 int BinaryTree::RMaxQ(const int l, const int r) {
+    /// Particular cases
     if (l == r) return search(l);
     if (l > r) { // Invalid search
         return -1;
     }
+
+    /// Find the last node v on the same path
     BinaryTree* current = this;
     while (true) {
         int nextLeftKey = current->left->node.key;
@@ -109,7 +112,7 @@ int BinaryTree::RMaxQ(const int l, const int r) {
         break;
     }
 
-
+    /// Find the max at the left of v
     int maxLeft = -1;
     BinaryTree* currentLeft = current->left;
     while(currentLeft->left != nullptr) { // At a node
@@ -122,7 +125,7 @@ int BinaryTree::RMaxQ(const int l, const int r) {
     }
     maxLeft = (maxLeft < currentLeft->node.value)? currentLeft->node.value : maxLeft;
 
-
+    /// Find the max at the right of v
     int maxRight = -1;
     BinaryTree* currentRight = current->right;
     while(currentRight->left != nullptr) { // At a node
@@ -138,11 +141,19 @@ int BinaryTree::RMaxQ(const int l, const int r) {
     return (maxRight < maxLeft)? maxLeft : maxRight;
 }
 
+/**
+ * Destructor for a BinaryTree
+ */
 BinaryTree::~BinaryTree() {
     delete left;
     delete right;
 }
 
+/**
+ * Search the wanted leaf's value
+ * @param k the key of the wanted leaf
+ * @return -1 if no such leaf found else the value of the found leaf
+ */
 int BinaryTree::search(int k) {
     BinaryTree* current = this;
     while (current->left != nullptr) {
