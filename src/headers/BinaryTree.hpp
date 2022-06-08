@@ -9,18 +9,25 @@ typedef struct NODE {
 class BinaryTree {
 
 public:
+    /// Attribute
     BinaryTree* left = nullptr;
     BinaryTree* right = nullptr;
-
-
-public:
     NODE node {0, 0};
-    int update(int k , int val);
-    void print(int indent = 0) ;
-    static BinaryTree* buildFromLeaves(NODE sortedLeaves[], int start, int end);
-    BinaryTree(BinaryTree* left, BinaryTree* right, NODE node);
 
+    /// Constructor
+    BinaryTree(BinaryTree* left, BinaryTree* right, NODE node);
+    static BinaryTree* buildFromLeaves(NODE sortedLeaves[], int start, int end);
+
+    ///Destructor
+    ~BinaryTree();
+
+    ///Method
+    int update(int k , int val);
     int RMaxQ(int l, int r);
+    void print(int indent = 0) ;
+    int search(int k);
+
+
 
 };
 
