@@ -1,9 +1,9 @@
 #include <cstdio>
 #include <string>
 #include <iostream>
-#include "headers/BinaryTree.hpp"
+#include "BinaryTree.hpp"
 
-
+using namespace std;
 
 /**
  * Default constructor for a binary tree
@@ -100,6 +100,13 @@ int BinaryTree::RMaxQ(const int l, const int r) {
     /// Find the last node v on the same path
     BinaryTree* current = this;
     while (true) {
+        if (current->left == nullptr) {
+            if (current->node.key > r || current->node.key < l) {
+                return -1; // Out of key range
+            } else {
+                return current->node.value;
+            }
+        }
         int nextLeftKey = current->left->node.key;
         if (nextLeftKey < l && nextLeftKey < r) {
             current = current->right;
@@ -111,7 +118,6 @@ int BinaryTree::RMaxQ(const int l, const int r) {
         }
         break;
     }
-
     /// Find the max at the left of v
     int maxLeft = -1;
     BinaryTree* currentLeft = current->left;
@@ -123,7 +129,7 @@ int BinaryTree::RMaxQ(const int l, const int r) {
             currentLeft = currentLeft->left;
         }
     }
-    maxLeft = (maxLeft < currentLeft->node.value)? currentLeft->node.value : maxLeft;
+    if (currentLeft->node.key >= l) maxLeft = (maxLeft < currentLeft->node.value)? currentLeft->node.value : maxLeft;
 
     /// Find the max at the right of v
     int maxRight = -1;
@@ -136,7 +142,7 @@ int BinaryTree::RMaxQ(const int l, const int r) {
             currentRight = currentRight->left;
         }
     }
-    maxRight = (maxRight < currentRight->node.value)? currentRight->node.value : maxRight;
+    if (currentRight->node.key <= r) maxRight = (maxRight < currentRight->node.value)? currentRight->node.value : maxRight;
 
     return (maxRight < maxLeft)? maxLeft : maxRight;
 }
@@ -145,6 +151,7 @@ int BinaryTree::RMaxQ(const int l, const int r) {
  * Destructor for a BinaryTree
  */
 BinaryTree::~BinaryTree() {
+    if (left == nullptr) return;
     delete left;
     delete right;
 }

@@ -27,7 +27,16 @@ public:
     void print(int indent = 0) ;
     int search(int k);
 
-
+    ///Operator overloading
+    bool operator==(const BinaryTree& toTest) const {
+        if(left == nullptr && toTest.left == nullptr) {
+            return node.value == toTest.node.value && node.key == toTest.node.key;
+        } else {
+            return node.value == toTest.node.value && node.key == toTest.node.key
+                    && *left==*toTest.left
+                    && *right==*toTest.right;
+        }
+    }
 
 };
 
