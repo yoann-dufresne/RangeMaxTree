@@ -1,25 +1,25 @@
-#ifndef RANGEMAXTREE_BINARYTREE_HPP
-#define RANGEMAXTREE_BINARYTREE_HPP
+#ifndef RANGEMAXTREE_MAXRANGETREE_HPP
+#define RANGEMAXTREE_MAXRANGETREE_HPP
 
 typedef struct NODE {
     int key;
     int value;
 } NODE;
 
-class BinaryTree {
+class MaxRangeTree {
 
 public:
     /// Attribute
-    BinaryTree* left = nullptr;
-    BinaryTree* right = nullptr;
+    MaxRangeTree* left = nullptr;
+    MaxRangeTree* right = nullptr;
     NODE node {0, 0};
 
     /// Constructor
-    BinaryTree(BinaryTree* left, BinaryTree* right, NODE node);
-    static BinaryTree* buildFromLeaves(NODE sortedLeaves[], int start, int end);
+    MaxRangeTree(MaxRangeTree* left, MaxRangeTree* right, NODE node);
+    static MaxRangeTree* buildFromLeaves(NODE sortedLeaves[], int start, int end);
 
     ///Destructor
-    ~BinaryTree();
+    ~MaxRangeTree();
 
     ///Method
     int update(int k , int val);
@@ -28,7 +28,7 @@ public:
     int search(int k);
 
     ///Operator overloading
-    bool operator==(const BinaryTree& toTest) const {
+    bool operator==(const MaxRangeTree& toTest) const {
         if(left == nullptr && toTest.left == nullptr) {
             return node.value == toTest.node.value && node.key == toTest.node.key;
         } else {
@@ -41,4 +41,4 @@ public:
 };
 
 
-#endif //RANGEMAXTREE_BINARYTREE_HPP
+#endif //RANGEMAXTREE_MAXRANGETREE_HPP

@@ -1,40 +1,38 @@
 #include <iostream>
 
-#include "BinaryTree.hpp"
-
-using namespace std;
+#include "MaxRangeTree.hpp"
 
 int main() {
-    NODE node1 = {1, 10};
-    NODE node2 = {2, 5};
-    NODE node3 = {3, 9};
-    NODE node4 = {4, 11};
-    NODE node5 = {5, 3};
-    NODE node6 = {6, 15};
-    NODE node7 = {7, 1};
-    NODE node8 = {8, 13};
-    NODE node9 = {9, 7};
-    NODE node10 = {10, 16};
-    NODE node11 = {11, 13};
-    NODE node12 = {12, 12};
-    NODE node13 = {13, 6};
-    NODE node14 = {14, 8};
-    NODE node15 = {15, 2};
-    NODE node16 = {16, 14};
 
-    NODE array[] = {node1, node2, node3, node4, node5, node6, node7, node8, node9,
-                    node10, node11, node12, node13, node14, node15, node16};
+    /// A few nodes to make an example
+    NODE leaf8_0 = {5, 29};
+    NODE leaf8_1 = {8, 36};
+    NODE leaf8_2 = {11, 21};
+    NODE leaf8_3 = {14, 24};
+    NODE leaf8_4 = {22, 11};
+    NODE leaf8_5 = {35, 15};
+    NODE leaf8_6 = {42, 11};
+    NODE leaf8_7 = {51, 4};
 
-    BinaryTree* t = BinaryTree::buildFromLeaves(array, 0, 2);
-    t->print();
+    /// Sort your nodes by key with your favorite sort
+    NODE sortedLeaves8[] = {leaf8_0, leaf8_1, leaf8_2, leaf8_3,
+                            leaf8_4, leaf8_5, leaf8_6, leaf8_7};
 
-    BinaryTree* t1 = BinaryTree::buildFromLeaves(array, 0, 16);
-    cout << (*t == *t1) << endl;
-    t1->print();
-//
-//
-    delete t;
-    delete t1;
+    /// Build a MaxRangeTree from a sorted list of leaves with a static constructor
+    MaxRangeTree* firstExample = MaxRangeTree::buildFromLeaves(sortedLeaves8, 0, 8); // end is excluded
 
-    return 0;
+    firstExample->print(); // To have a look on your tree;
+    std::cout << "MaxRangeQuery from 14 to 34 = " << firstExample->RMaxQ(14, 34) << std::endl; // To query the max value between the key 13 and 34 (both included)
+    std::cout << "Update leaf of key 8 with 23 (1 if found leaf of key 8, else -1) = "
+        << firstExample->update(8, 23) << std::endl;
+    firstExample->print(); // Let's look at the update
+
+    MaxRangeTree* toCompare = MaxRangeTree::buildFromLeaves(sortedLeaves8, 2, 6);
+    std::cout << "We can compare them : " << (*toCompare == *firstExample) << std::endl;
+
+    /// Don't forget to delete
+    delete firstExample;
+    delete toCompare;
+
+    return EXIT_SUCCESS;
 }
