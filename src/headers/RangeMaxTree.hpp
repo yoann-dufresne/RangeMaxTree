@@ -1,6 +1,10 @@
 #ifndef RANGEMAXTREE_MAXRANGETREE_HPP
 #define RANGEMAXTREE_MAXRANGETREE_HPP
 
+#include <vector>
+
+using namespace std;
+
 typedef struct NODE {
     int key;
     int value;
@@ -17,6 +21,7 @@ public:
     /// Constructor
     MaxRangeTree(MaxRangeTree* left, MaxRangeTree* right, NODE node);
     static MaxRangeTree* buildFromLeaves(NODE sortedLeaves[], int start, int end);
+    static MaxRangeTree* buildFromLeaves(vector<pair<uint64_t, uint64_t> > &sortedPositions, int begin, int end);
 
     ///Destructor
     ~MaxRangeTree();

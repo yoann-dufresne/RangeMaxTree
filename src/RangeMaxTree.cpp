@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <string>
 #include <iostream>
-#include "MaxRangeTree.hpp"
+#include "RangeMaxTree.hpp"
 
 using namespace std;
 
@@ -41,6 +41,29 @@ MaxRangeTree* MaxRangeTree::buildFromLeaves(NODE *sortedLeaves, int start, int e
         }
     }
 }
+
+/**
+ * Constructor for the MaxRangeTree class from a sorted array of leaves ( [start, end) )
+ * @param sortedLeaves a sorted vector of NODE representing leaves
+ * @param start the start of the wanted range of teh array (included)
+ * @param end the end of the wanted range of the array (excluded)
+ * @return a build MaxRangeTree
+ */
+MaxRangeTree* MaxRangeTree::buildFromLeaves(vector<pair<uint64_t, uint64_t> > &sortedPositions, int begin, int end) {
+    if (end - begin > 1) {
+        int mid = (begin + end) / 2;
+        MaxRangeTree* leftTree = MaxRangeTree::buildFromLeaves(sortedPositions, begin, mid);
+        MaxRangeTree* rightTree = MaxRangeTree::buildFromLeaves(sortedPositions, mid, end);
+        NODE currentNode = {rightTree->node.key, 
+                            (leftTree->node.value < rightTree->node.value)?
+                                rightTree->node.value:leftTree->node.value};
+        return new MaxRangeTree(leftTree, rightTree, currentNode);
+    } else {
+        NODE leaf = {begin, 0};
+        return new MaxRangeTree(nullptr, nullptr, leaf);
+    }
+}
+
 
 /**
  * Update a leaf value in the MaxRangeTree

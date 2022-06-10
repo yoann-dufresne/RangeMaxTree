@@ -1,5 +1,5 @@
 add_library(RangeMaxTree
-        MaxRangeTree.cpp)
+        RangeMaxTree.cpp)
 
 target_include_directories(RangeMaxTree
         PUBLIC

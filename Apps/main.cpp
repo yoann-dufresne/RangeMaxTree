@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "MaxRangeTree.hpp"
+#include "RangeMaxTree.hpp"
 
 int main() {
 

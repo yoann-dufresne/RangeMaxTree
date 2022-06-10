@@ -2,7 +2,7 @@
 #include <fstream>
 #include <vector>
 
-#include "MaxRangeTree.hpp"
+#include "RangeMaxTree.hpp"
 #include "lest.hpp"
 
 
@@ -11,7 +11,7 @@ using namespace lest;
 
 const test building[] = {
         /// Test buildFromLeaves
-        CASE({"2 leaves : ") {
+        CASE("2 leaves : ") {
             cout << "building : " << endl;
             NODE leaf2_0 = {1, 6};
             NODE leaf2_1 = {2, 5};
@@ -28,8 +28,8 @@ const test building[] = {
 
             delete tree2;
             delete ref2;
-        }},
-            CASE({"4 leaves : ") {
+        },
+            CASE("4 leaves : ") {
             cout << "building : " << endl;
             NODE leaf4_0 = {1, 18};
             NODE leaf4_1 = {4, 5};
@@ -51,8 +51,8 @@ const test building[] = {
             EXPECT(*ref4 == *tree4);
             delete tree4;
             delete ref4;
-        }},
-            CASE({"8 leaves : ") {
+        },
+            CASE("8 leaves : ") {
             cout << "building : " << endl;
             NODE leaf8_0 = {5, 29};
             NODE leaf8_1 = {8, 5};
@@ -87,9 +87,9 @@ const test building[] = {
             EXPECT(*ref8 == *tree8);
             delete ref8;
             delete tree8;
-        }},
+        },
 
-        CASE({"16 leaves : ") {
+        CASE("16 leaves : ") {
             cout << "building : " << endl;
             NODE leaf16_0 = {5, 72};
             NODE leaf16_1 = {9, 40};
@@ -150,11 +150,11 @@ const test building[] = {
             delete tree16;
             delete ref16;
 
-        }}
+        }
 };
 
 const test update[] {
-    CASE({"2 leaves found : ") {
+    CASE("2 leaves found : ") {
             NODE leaf2_0 = {1, 6};
             NODE leaf2_1 = {2, 5};
             NODE leaf2_1_mod = {2, 10};
@@ -166,9 +166,9 @@ const test update[] {
             EXPECT(*ref2 == *tree2);
             delete ref2;
             delete tree2;
-        }},
+        },
 
-        CASE({"2 leaves not found : ") {
+        CASE("2 leaves not found : ") {
             NODE leaf2_0 = {1, 6};
             NODE leaf2_1 = {2, 5};
             NODE sortedLeaves2[] = {leaf2_0, leaf2_1};
@@ -178,9 +178,9 @@ const test update[] {
             EXPECT(*tree2 == *ref2);
             delete ref2;
             delete tree2;
-    }},
+    },
 
-        CASE({"16 leaves found : ") {
+        CASE("16 leaves found : ") {
             NODE leaf16_0 = {5, 72};
             NODE leaf16_1 = {9, 40};
             NODE leaf16_2 = {10, 30};
@@ -212,8 +212,8 @@ const test update[] {
                     EXPECT(*ref16 == *tree16);
             delete ref16;
             delete tree16;
-    }},
-        CASE({"16 leaves not found : ") {
+    },
+        CASE("16 leaves not found : ") {
             NODE leaf16_0 = {5, 72};
             NODE leaf16_1 = {9, 40};
             NODE leaf16_2 = {10, 30};
@@ -239,11 +239,11 @@ const test update[] {
             EXPECT(*tree16 == *ref16);
             delete ref16;
             delete tree16;
-    }}
+    }
 };
 
 const test rangeMaxQuery[] {
-    CASE({"16 leaves : ") {
+    CASE("16 leaves : ") {
             NODE leaf16_0 = {5, 72};
             NODE leaf16_1 = {9, 40};
             NODE leaf16_2 = {10, 30};
@@ -280,7 +280,7 @@ const test rangeMaxQuery[] {
             EXPECT(tree16->RMaxQ(15, 25) == 85);
             EXPECT(tree16->RMaxQ(15, 26) == 95);
             delete tree16;
-    }}
+    }
 };
 
 int main() {
